@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <link rel="icon" type="image/png" href="favicon-wrush.png">
+  <title>Word Rush</title>
+  <meta name="description" content="Test your vocabulary and speed" />
+  <meta name="Word Rush" content="Test your vocabulary and speed" />
+  <meta name="googlebot" content="notranslate" />
+
+  <link rel="stylesheet" href="wordStyle.css">
+  <link rel="stylesheet" href="popUp.css">
+  <script src="./wordScript.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.0/html2canvas.min.js"></script>
+  <script>
+/*       $(document).ready(function(){
+      $(".wordlechars").keyup(function(e) {
+          if (e.which == 8 || e.which == 46) {
+            $(this).prev('input').focus();
+            // $(this).val('');
+        }
+        else if (e.which == 9){
+            
+        } else if (e.which > 64 || e.which < 91) {
+          $(this).next('input').focus();     
+        }
+        });
+
+      }); */
+
+
+    $(document).on("keyup", function (e) {
+    debugger;
+    let enteredWord = document.getElementsByName("row" + counter + "");
+    var keyValue = String.fromCharCode(e.which).toUpperCase();
+    if(e.which == 8) {
+      for (let index = enteredWord.length -1; index >= 0; index--) {
+        if(enteredWord[index].value.length == 0 ) {
+          continue;
+        } else {
+          enteredWord[index].value = "";
+          return;
+        }
+      }  
+    } else if ((e.which >=65 && e.which <=90) || (e.which >=97 && e.which <=122)){
+      for (let index = 0 ; index < enteredWord.length; index++) {
+        if(enteredWord[index].value.length == 0 ) {
+          enteredWord[index].value = keyValue;
+          return;
+        } else {
+          continue;
+        }
+      }
+  } else if (e.which ==13) {
+    onSubmit();
+  } else {
+    return false;
+  }
+
+  });
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+</head>
+
+<body class="bodycenter" onload="onPageload()">
+
+
+  <div id="wordgrid" class="center fullheight" style="clear:both;  text-align:center; background-color: rgb(235, 246, 247); opacity: 1;">
+    <h4 id="heading" class="center" style="text-align: center; font-size: 25px; text-underline-position: below;">WORD RUSH</h4>
+    <div id="dateDiv"  class="linkInvisible">
+      <script>
+      date = new Date().toLocaleDateString();
+      document.write(date);
+      </script>
+    </div>
+    <div class="wordleGrid" id="wordleGrid">
+    <input type="text" id="00" name="row0" maxlength="1" class="wordlechars"> <input type="text" id="01" name="row0" maxlength="1" class="wordlechars"> <input type="text" id="02" name="row0" maxlength="1" class="wordlechars"> <input type="text" id="03" name="row0" maxlength="1" class="wordlechars"> <input type="text" id="04" name="row0" maxlength="1" class="wordlechars"> <br>
+    <input type="text" id="10" name="row1" maxlength="1" class="wordlechars"> <input type="text" id="11" name="row1" maxlength="1" class="wordlechars"> <input type="text" id="12" name="row1" maxlength="1" class="wordlechars"> <input type="text" id="13" name="row1" maxlength="1" class="wordlechars"> <input type="text" id="14" name="row1" maxlength="1" class="wordlechars"> <br>
+    <br>
+    <input type="button" id="buttonPress" value="Start" style="height:35px; width:200px; font-size: 20px;"  onclick="onSubmit()">
+    <div id="snackbar"></div>
+    </div>
+    <br>
+    <div id="keyboard">
+    <input type="button" id="A" class="nothing" value="A" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="B" class="nothing" value="B" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="C" class="nothing" value="C" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="D" class="nothing" value="D" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="E" class="nothing" value="E" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="F" class="nothing" value="F" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="G" class="nothing" value="G" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="H" class="nothing" value="H" onclick="onKeyboardClick(this.id)">
+    <br>
+    <input type="button" id="I" class="nothing" value="I" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="J" class="nothing" value="J" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="K" class="nothing" value="K" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="L" class="nothing" value="L" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="M" class="nothing" value="M" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="N" class="nothing" value="N" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="O" class="nothing" value="O" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="P" class="nothing" value="P" onclick="onKeyboardClick(this.id)">
+    <br>
+    <input type="button" id="Q" class="nothing" value="Q" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="R" class="nothing" value="R" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="S" class="nothing" value="S" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="T" class="nothing" value="T" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="U" class="nothing" value="U" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="V" class="nothing" value="V" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="W" class="nothing" value="W" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="X" class="nothing" value="X" onclick="onKeyboardClick(this.id)">
+    <br>
+    <input type="button" id="enter" class="specialKeys" value="ENTER" onclick="onSubmit()">
+    <input type="button" id="Y" class="nothing" value="Y" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="Z" class="nothing" value="Z" onclick="onKeyboardClick(this.id)">
+    <input type="button" id="back" class="specialKeys" value="DELETE" onclick="onKeyboardClick(this.id)">
+    <br>
+  </div>
+  <input type="button" id="buttonPress" value="Submit" style="height:40px; width:200px; font-size: 20px; visibility: hidden;"  onclick="onSubmit()">
+  <div class="pop">
+    <label for="3" class="open" id="howTo"><b>&#63;</b></label>
+    <input type="checkbox" id="3" />
+    <div class="modal">
+      <div class="modal__inner">
+          <p><b>Make a train of Words</b></p>
+          <p>After pressing Start button you have <u>20 seconds to make as many 5 letter words as you can</u></p>
+          <p>Only condition being that <u>each word should start from the last letter of previous word</u></p>
+          <p>The first letter will be randomly provided by the application</p>
+          <p>It will be same for each day so that you <u>don't spend too much time playing this ;)</u></p>
+          <label class="btn-close" for="3">X</label>
+      </div>
+    </div>
+    
+</div>
+
+  </div>
+
+</body>
+</html>
